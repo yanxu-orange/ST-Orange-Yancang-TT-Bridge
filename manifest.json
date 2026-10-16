@@ -1,0 +1,11 @@
+{
+  "display_name": "砚藏联动",
+  "loading_order": 50,
+  "requires": [],
+  "optional": [],
+  "js": "index.js",
+  "css": "style.css",
+  "author": "绫与小砚",
+  "version": "0.2.6",
+  "homePage": "https://github.com/yanxu-orange/ST-Orange-Yancang-TT-Bridge"
+}

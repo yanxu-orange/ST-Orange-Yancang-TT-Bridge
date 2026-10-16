@@ -1,0 +1,7 @@
+/* Keep the official extension drawer, typography and button surfaces. */
+#yancang-tt .yc-actions { display:flex; flex-wrap:wrap; gap:5px; }
+#yancang-tt input { width:100%; box-sizing:border-box; }
+#yancang-tt output { display:block; white-space:pre-wrap; overflow-wrap:anywhere; }
+#yancang-tt [data-pending] { font-weight:600; }
+#yancang-tt [data-time] { opacity:0.8; }
+#yancang-tt [hidden] { display:none !important; }

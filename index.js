@@ -1,5 +1,5 @@
 // Independent interoperating extension. No TT implementation or model calls.
-const PHONE_DIAGNOSTIC = false; // Packager enables only the independent DIAGNOSTIC archive.
+// Safe recent linkage diagnostics are available in ordinary builds.
 let diagnostic = null, diagnosticCallSequence = 0, diagnosticLastTask = '';
 const dEvent = (stage, detail = {}) => { try { diagnostic?.event(stage, { generation: connectionGeneration, ...detail }); } catch {} };
 const dRun = (stage, fn, detail = {}) => diagnostic ? diagnostic.run(stage, fn, { generation: connectionGeneration, ...detail }) : fn();
@@ -412,7 +412,7 @@ jQuery(async () => {
     const container = document.querySelector('#extensions_settings2') || document.querySelector('#extensions_settings');
     if (!container) return;
     container.append(panel);
-    if (PHONE_DIAGNOSTIC) try { diagnostic = (await import('./diagnostic.js')).attachDiagnostic(panel); } catch { /* Diagnostic failure must not alter business. */ }
+    try { diagnostic = (await import('./diagnostic.js')).attachDiagnostic(panel); } catch { /* Diagnostic failure must not alter business. */ }
     startupCleanup = (async () => {
         try { await forgetRegistration((await settingsModule()).extension_settings[STORAGE_KEY]); } catch { /* No data/secret diagnostics. */ }
     })();

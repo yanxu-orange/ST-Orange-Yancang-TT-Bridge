@@ -89,9 +89,12 @@ export function createDiagnostic({ storage = globalThis.localStorage, clock = ()
 export function attachDiagnostic(panel) {
     const d=createDiagnostic();
     const controls=document.createElement('div');
-    controls.innerHTML='<details><summary>联动诊断</summary><button class="menu_button" data-diag-export>导出TT诊断</button><button class="menu_button" data-diag-clear>清除联动诊断</button><output data-diag-notice></output></details>';
-    panel.querySelector('.inline-drawer-content').append(controls);
-    const notice=controls.querySelector('[data-diag-notice]');
+    controls.className='yc-diagnostics';
+    controls.innerHTML='<button class="menu_button" data-diag-export>导出诊断</button><button class="menu_button" data-diag-clear>清除记录</button>';
+    const notice=document.createElement('output');
+    notice.setAttribute('data-diag-notice','');
+    panel.querySelector('[data-connection-actions]').append(controls);
+    panel.querySelector('.inline-drawer-content').append(notice);
     controls.querySelector('[data-diag-export]').addEventListener('click',async()=>{try{await d.exportFile();const t=d.snapshot();notice.textContent=t.events.length===0?'暂无联动记录':t.events.some(e=>e.stage==='retention_expired')?'此前记录已过期，已导出最近记录':'TT诊断已导出';}catch{notice.textContent='诊断未保存，记录仍保留';}});
     controls.querySelector('[data-diag-clear]').addEventListener('click',()=>{d.clear();notice.textContent='本次诊断已清除';});
     document.addEventListener('visibilitychange',()=>d.event(document.visibilityState==='visible'?'visible':'hidden'));

@@ -24,17 +24,18 @@ panel.innerHTML = `<div class="inline-drawer">
 <div class="inline-drawer-toggle inline-drawer-header"><b>砚藏联动</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div>
 <div class="inline-drawer-content">
 <div data-pairing><input data-code class="text_pole" type="password" autocomplete="off" spellcheck="false" placeholder="粘贴本次连接码" aria-label="本次连接码">
-<button data-action="connect" class="menu_button">连接</button></div>
+</div>
+<div class="yc-actions" data-connection-actions><button data-action="connect" class="menu_button">连接</button><button data-action="disconnect" class="menu_button" hidden>断开</button></div>
 <div data-pending hidden></div>
 <div class="yc-actions"><button data-action="receive" class="menu_button" hidden>确认接收为新角色</button><button data-action="cancel" class="menu_button" hidden>取消本次传输</button></div>
 <div data-time hidden></div><output role="status">未连接</output>
 <button data-action="refresh" class="menu_button" hidden>刷新角色列表</button>
-<div class="yc-actions"><button data-action="disconnect" class="menu_button" hidden>断开</button></div>
 <details data-backup hidden><summary>备用：发送TT当前角色</summary><button data-action="send" class="menu_button">发送当前角色至砚藏预览</button></details>
 </div></div>`;
 function updatePanel() {
     const connected = ready && !!connection && connection.expiresAt > Date.now();
     panel.querySelector('[data-pairing]').hidden = connected;
+    panel.querySelector('[data-action="connect"]').hidden = connected;
     panel.querySelector('[data-time]').hidden = !connected;
     panel.querySelector('[data-action="disconnect"]').hidden = !connected;
     panel.querySelector('[data-backup]').hidden = !connected || currentTask?.direction !== 'from_tt' || !!currentTask.entryId;

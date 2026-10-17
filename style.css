@@ -5,3 +5,8 @@
 #yancang-tt [data-pending] { font-weight:600; }
 #yancang-tt [data-time] { opacity:0.8; }
 #yancang-tt [hidden] { display:none !important; }
+
+#yancang-tt [data-connection-actions] { align-items:center; }
+#yancang-tt .yc-diagnostics { display:contents; }
+#yancang-tt .yc-diagnostics .menu_button { background:transparent; border-color:transparent; box-shadow:none; color:var(--SmartThemeBodyColor); opacity:0.68; }
+#yancang-tt [data-diag-notice]:empty { display:none; }

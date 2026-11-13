@@ -1,9 +1,9 @@
 // Bounded production local diagnostics. No native/HTTP global hooks or resource inspection.
 const KEY = 'yancang.tt.production.diagnostic.v1';
 const BUILD = 'TT-PRODUCTION-1', LIMIT = 1024, MAX = 256 * 1024, WINDOW = 1200000, RETAIN = 86400000;
-const prefixes = ['startup_cleanup','connection_cleanup','cancel_execution','notify_peer','registration_list','permission_off','registration_pause','registration_remove','proxy','registration_create','registration_activate','discover','permission_allow','queue','native_start','native_call','business','receipt'];
+const prefixes = ['startup_cleanup','connection_cleanup','cancel_execution','notify_peer','registration_list','permission_off','registration_pause','registration_remove','proxy','registration_create','registration_activate','discover','permission_allow','queue','native_start','native_call','business','receipt','catalog_fetch','catalog_parse'];
 const stages = new Set(['page_start','visible','hidden','pagehide','click_connect','decode_ok','confirm','busy_guard','same_connection','local_detach','scope_stale','task_visible','result','retention_expired', ...prefixes.flatMap(p => [p+'_begin',p+'_end',p+'_fail'])]);
-const kinds = new Set(['none','connect','receive','send','cancel','disconnect','status','get','put','catalog','thumbnail','beginBusiness','finish','itemFailed','known_response','not_sent','outcome_unknown','other','to_tt','from_tt','uncorrelated_id','initialize_timeout','initialize_failed','call_timeout','call_cancelled','response_failed']);
+const kinds = new Set(['none','connect','receive','send','cancel','disconnect','status','get','put','catalog','catalogStarted','catalogFailed','thumbnail','beginBusiness','finish','itemFailed','known_response','not_sent','outcome_unknown','other','to_tt','from_tt','uncorrelated_id','initialize_timeout','initialize_failed','call_timeout','call_cancelled','response_failed']);
 const fields = new Set(['generation','call','current','hasTask','businessStarted','sameTask','accepted']);
 function validEvent(e) {
     if (!e || Object.keys(e).some(k => !['seq','segment','ms','stage','kind',...fields].includes(k))) return false;
